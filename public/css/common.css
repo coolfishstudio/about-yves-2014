@@ -27,7 +27,6 @@ input,textarea{outline:none; resize:none; border:none;}
 	position:relative;
 	width:100%;
 	height:100%;
-	overflow:hidden;
 }
 .body_cc{
 	width:400px;
