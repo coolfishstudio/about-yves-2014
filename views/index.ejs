@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>IT酷鱼网 | Yves个人作品网 -- 20140501版</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <script src="js/MyQuery.js" ></script>
 <script src="js/MyCommon.js" ></script>
@@ -125,7 +126,11 @@ $(function(){
 				},30); 		
 		
 			}
-			if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1){
+			var mobileBrowser= /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+			if(mobileBrowser){
+				agent = '移动端';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1){
 				agent = '火狐';
 				f = true;
 			}else if(navigator.userAgent.toLowerCase().indexOf('chrome') != -1){
@@ -145,6 +150,12 @@ $(function(){
 				agent = 'IE6';
 			}else if(navigator.userAgent.toLowerCase().indexOf('rv:11.0') != -1){
 				agent = 'IE11';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('opera') != -1){
+				agent = 'opera';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('safari') != -1){
+				agent = 'safari';
 				f = true;
 			}else{
 				
