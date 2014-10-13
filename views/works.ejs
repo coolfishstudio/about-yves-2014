@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IT酷鱼网 | Yves个人作品网 -- 20140501版</title>
+<link href="/css/common.css" rel="stylesheet" type="text/css" />
+<script src="/js/MyQuery.js" ></script>
+<script src="/js/MyCommon.js" ></script>
+<script>
+$(function(){
+	var iMenuNum = 3;
+	toMenu(iMenuNum);//封装后的公共菜单事件
+	
+	//----------分页样式
+	$('#page div').hover(function(){
+		$(this).animate({opacity : 0});
+	},function(){
+		$(this).animate({opacity : 100});
+	});
+	//----------实例样式
+	$('.case li').hover(function(){
+		$(this).find('.case_w').animate({bottom : 30});
+		$(this).find('.fire').animate({opacity : 50});
+		$(this).find('.x').animate({opacity : 100});
+		$(this).find('.y').animate({right : 80 , opacity : 100});
+	},function(){
+		$(this).find('div').animate({bottom : 14});
+		$(this).find('.fire').animate({opacity : 0});
+		$(this).find('.x').animate({opacity : 0});
+		$(this).find('.y').animate({right : 50 , opacity : 0});
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<div class="body">
+	<div class="top">
+		<div class="logo">
+        	<div class="sc">
+            	<div class="item">
+    				<div>
+                    	<a href="###">
+                    		<div class="item_content" title="联系电话">
+                        		18210088607
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+                            	<img alt="" src="/img/top_4.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_4.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+    	                	<div class="item_content" title="我的QQ">
+        		                QQ:461836324
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_3.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_3.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+                    		<div class="item_content" title="我的姓名">
+                        		于春宇
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_2.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_2.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                
+            </div>
+        </div>
+		<div class="menu" id="menu">
+			<ul>
+				<li><a href="/homepage" style="background-image:url(/img/menu_homepage.png);"></a></li>
+				<li><a href="/profile" style="background-image:url(/img/menu_personage.png);"></a></li>
+				<li><a href="/blog" style="background-image:url(/img/menu_article.png);"></a></li>
+				<li><a href="/works" style="background-image:url(/img/menu_cases.png);"></a></li>
+				<li><a href="/message" style="background-image:url(/img/menu_communication.png);"></a></li>
+			</ul> 
+			<div class="menu_slider">
+				<div class="menu_slider_bar" id="menuSliderBar"></div>
+				<div class="menu_slider_pointer" id="menuSliderPointer"></div>
+			</div>
+		</div>
+    </div>
+    <div class="center">
+    	<div class="clear"></div>
+    	<div class="center_box">
+        	<div class="box_t"></div>
+            <div class="box_m">
+            	<div class="box_area">
+                	<img class="fl inline" src="/img/text_myworks.png" />
+                    <div id="page" class="page fr inline page_bg1">
+                    	<div class="fl inline page_l"/></div>
+                        <div class="fl inline page_r"/></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box_b"></div>
+            <ul class="case">
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="opus/img/Y_01.jpg"></img>
+                        <div class="fire"></div>
+                        <!--<a class="x" href="javascript:;">技术：拖拽、运动</a>-->
+						<a class="y" href="opus/Y_01/index" target="_blank" title="小球称重"></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="opus/img/Y_02.jpg"></img>
+                        <div class="fire"></div>
+                        <!--<a class="x" href="javascript:;">技术：选项卡、定时器</a>-->
+						<a class="y" href="opus/Y_02/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="opus/img/Y_03.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/Y_03/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                        <div class="case_title case_t3 case_title_t"></div>
+                       	<img src="opus/img/Y_04.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/Y_04/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                        <div class="case_title case_t3 case_title_t"></div>
+                       	<img src="opus/img/Y_05.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/Y_05/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="opus/img/Y_06.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/Y_06/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="opus/img/J_01.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/J_01/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="opus/img/J_02.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/J_02/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="opus/img/J_03.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/J_03/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="opus/img/J_04.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/J_04/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                        <div class="case_title case_t6 case_title_t"></div>
+                       	<img src="opus/img/J_05.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="opus/J_05/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="opus/img/Y_07.jpg"></img>
+                        <div class="fire"></div>
+                        <!--<a class="x" href="javascript:;">技术：选项卡、定时器</a>-->
+						<a class="y" href="opus/Y_07/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t4"></div>
+                       	<img src="opus/img/H_02.jpg"></img>
+                        <div class="fire"></div>
+                        <!--<a class="x" href="javascript:;">技术：选项卡、定时器</a>-->
+						<a class="y" href="opus/H_02/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+        	
+        	</ul>
+        </div>
+    </div>
+    <div class="foot">Yves个人网站&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/">京ICP备14019006号</a>&nbsp;&nbsp;|&nbsp;&nbsp;联系方式：18210088607&nbsp;&nbsp;|&nbsp;&nbsp;QQ:461836324&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+</div>
+</body>
+</html>

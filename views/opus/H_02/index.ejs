@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> jquery mobile 例子</title>
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+-->
+<link rel='stylesheet' href='/opus/H_02/css/jquery.mobile-1.4.2.min.css'>
+<script src='/opus/H_02/js/jquery.js'></script>
+<script src='/opus/H_02/js/jquery.mobile-1.4.2.min.js'></script>
+
+<script>
+$(function(){
+	
+	var $Title = $('#box input[type="text"]');
+	var $Desc = $('#box textarea');
+	var $Note = $('#my_note');
+	var iNow = window.localStorage.getItem('num') || 0;
+	//获取本地存储的
+	if(window.localStorage.getItem('num')){
+		for(var i = 0; i < iNow; i++){
+			createLi(i);
+		}
+	}
+	//新增
+	$('#add_box').click(function(){
+		//存储到本地里
+		window.localStorage.setItem('title_' + iNow,$Title.val());
+		window.localStorage.setItem('desc_' + iNow,$Desc.val());
+		createLi(iNow);
+		$Title.val('');
+		$Desc.val('');
+		iNow++;
+		window.localStorage.setItem('num',iNow);
+	});
+	//创建LI
+	function createLi(num){
+		var $Li = $('<li>');
+		var $A = $('<a>');
+		$Li.addClass('ui-first-child ui-last-child');
+		$Li.attr('num',num);
+		$A.attr('href','#show');
+		$A.attr('data-transition','slidedown');
+		$A.addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+		$A.html(window.localStorage.getItem('title_' + num));
+		$Li.append($A);
+		$Note.append($Li);
+		$Li.click(changeLi);
+	}
+	var oChangeLi = 0;
+	//显示内容
+	function changeLi(){
+		oChangeLi = $(this).attr('num');
+		$('#show_box input[type="text"]').val(window.localStorage.getItem('title_' + oChangeLi));
+		$('#show_box textarea').val(window.localStorage.getItem('desc_' + oChangeLi));	
+	}
+	//清空本地存储
+	$('#clean_note').click(function(){
+		if($('input:radio[name="msgClean"]:checked').val() == 'clean_y'){
+			 window.localStorage.clear();
+			 $Note.find('li').remove();
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+<!-- 主界面 -->
+<div data-role="page" id="home" class="theme" data-theme="a">
+	<div data-role="header">
+        <h1>记事本</h1>
+        <a href="#about" data-rel="dialog" data-role="button" class="ui-btn-right" data-icon="info">说明</a>
+	</div>
+	<div data-role="content">
+    	<ul data-role="listview" data-filter="true" data-filter-placeholder="输入你的文档名进行查询" id="my_note">
+        </ul>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+        	<ul>
+            	<li><a href="#add" data-transition="slidedown" data-icon="plus">新增</a></li>
+                <li><a href="#clean" data-icon="minus" data-rel="dialog">清空</a></li>
+            </ul>
+        </div>
+	</div>
+</div>
+<!-- 说明 -->
+<div data-role="page" id="about" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>说明</h1>
+    </div>
+    <div data-role="content">
+    	<h3>jquery mobile实例</h3>
+        <h5>1.使用了HTML5的Storage本地存储技术</h5>
+        <h5>2.使用jquery mobile框架进行布局美化</h5>
+        <h6>此实例是为新浪乐居的面试而做。</h6>
+    </div>
+    <div data-role="footer">
+    	<h1>2014/05/14</h1>
+    </div>
+</div>
+<!-- 新增 -->
+<div data-role="page" id="add" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>新增</h1>
+    </div>
+    <div data-role="content" id="box">
+    	<label>文档名称：</label>      
+    	<input type="text" placeholder="输入你的文档名称"/>  
+        <label>输入内容：</label>  
+        <textarea placeholder="输入你的内容"></textarea>  
+    </div>
+    <div data-role="footer" data-position="fixed">
+    	<div data-role="navbar">
+        	<ul>
+            	<li><a href="#home" data-icon="check" data-transition="slideup" id="add_box">保存文档</a></li>
+                <li><a href="#home" data-role="button" data-transition="slideup" data-icon="home">返回</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 展示 -->
+<div data-role="page" id="show" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>记事本</h1>
+    </div>
+    <div data-role="content">
+    	<div data-role="content" id="show_box">
+            <label>文档名称：</label>      
+            <input type="text" readonly/>  
+            <label>文档内容：</label>  
+            <textarea readonly></textarea>  
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+    	<div data-role="navbar">
+        	<ul>
+                <li><a href="#home" data-role="button" data-transition="slideup" data-icon="home">返回</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 添加地图 -->
+<div data-role="page" id="map" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>添加地图</h1>
+    </div>
+    <div data-role="content">
+        <fieldset data-role="controlgroup">
+        	<legend>是否分享你此时的地图位置:</legend>
+        	<label for="share_y">分享</label>
+        	<input type="radio" name="mapShare" id="share_y" value="share_y">
+        	<label for="share_n">不分享</label>
+        	<input type="radio" name="mapShare" id="share_n" value="share_n" checked>	
+      	</fieldset>
+        <a href="#add" data-role="button" id="share_note">确定选项</a>
+    </div>
+    <div data-role="footer">
+    	&nbsp;
+    </div>
+</div>
+<!-- 清空 -->
+<div data-role="page" id="clean" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>清空本地存储</h1>
+    </div>
+    <div data-role="content">
+        <fieldset data-role="controlgroup">
+        	<legend>是否清空你的本地存储:</legend>
+        	<label for="clean_y">清空</label>
+        	<input type="radio" name="msgClean" id="clean_y" value="clean_y">
+        	<label for="clean_n">保留</label>
+        	<input type="radio" name="msgClean" id="clean_n" value="clean_n" checked>	
+      	</fieldset>
+        <a href="#home" data-role="button" id="clean_note">确定选项</a>
+    </div>
+    <div data-role="footer">
+    	&nbsp;
+    </div>
+</div>
+<!-- 查看地图 -->
+<div data-role="page" id="seeMap" class="theme" data-theme="a">
+	<div data-role="header">
+    	<h1>日记地图</h1>
+    </div>
+    <div data-role="content">
+        <div id="see_map" style="height:100px;width:100%"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>金山云产品服务</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;font-family: Verdana,Arial,Helvetica,'Microsoft YaHei',sans-serif;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+#box{
+	width: 1024px; 	
+	margin: 100px auto 0; 
+	overflow:hidden;
+	border:2px solid #e1e1e1;
+	background:#ffffff;
+	box-shadow:5px 5px 10px #333333;
+}
+#box h1{
+	line-height: 100%;
+	padding: 20px 20px 10px;
+	font-size: 18px;
+	color: #333333;
+	font-weight: bold;
+	border-bottom:2px dashed #CCC;
+	margin-bottom:20px;
+}
+.cpBottom{
+	margin-bottom:20px;
+	height:156px;
+}
+.cpBottom ul{
+	margin:0px auto;
+	width:1000px;
+	overflow:hidden;
+}
+.cpBottom ul li{
+	float:left;
+	margin-left: 4px;
+	margin-right: 4px;
+	width:240px;
+	border:1px #eaeaea solid;
+	position: relative;
+	height: 154px;
+}
+.cover{
+	position: absolute;
+	z-index: 2;
+	width: 240px;
+	height: 154px;
+	margin-bottom: -154px;
+}
+.wrap{
+	position: relative;
+	padding: 30px 20px;
+}
+.t1{
+	font-size: 26px;
+}
+p{
+	font-size: 16px;
+	line-height: 30px;
+}
+
+.opt{
+	position: absolute;
+	right: 20px;
+	bottom: -15px;
+}
+.opt a{
+	margin-right:5px;
+}
+.opt .btn{
+	position: relative;
+	display: inline-block;
+	min-width: 32px;
+	height: 28px;
+	line-height: 28px;
+	padding:3px 5px;
+	cursor: pointer;
+	border-radius: 3px;
+	color:#ffffff;
+}
+
+.btn1{
+	background:#00a7ff;	
+}
+.fc1{
+	color: #00a7ff;
+}
+.btn2{
+	background:#71ce00;	
+}
+.fc2{
+	color: #71ce00;
+}
+.btn3{
+	background:#1abc9c;	
+}
+.fc3{
+	color: #1abc9c;
+}
+.btn4{
+	background:#77b1d2;	
+}
+.fc4{
+	color: #77b1d2;
+}
+.btn8{
+	background:#339900;	
+}
+.fc8{
+	color: #339900;
+}
+.bg1{
+	background:url(/opus/J_01/img/bg.jpg) 0 0 no-repeat;
+}
+.bg2{
+	background:url(/opus/J_01/img/bg.jpg) -240px 0 no-repeat;
+}
+.bg3{
+	background:url(/opus/J_01/img/bg.jpg) -480px 0 no-repeat;
+}
+.bg4{
+	background:url(/opus/J_01/img/bg.jpg) -720px 0 no-repeat;
+}
+.bg5{
+	background:url(/opus/J_01/img/bg.jpg) 0 -308px no-repeat;
+}
+.bg6{
+	background:url(/opus/J_01/img/bg.jpg) -240px -308px no-repeat;
+}
+.bg7{
+	background:url(/opus/J_01/img/bg.jpg) -480px -308px no-repeat;
+}
+.bg8{
+	background:url(/opus/J_01/img/bg.jpg) -720px -308px no-repeat;
+}
+</style>
+<script src="/opus/J_01/js/jquery-1.7.2.js"></script>
+<script>
+$(function(){
+	$('.cpBottom ul li').hover(function(){
+		if($(this).find('.wrap').html() != ''){
+			//$(this).find('.cover').stop().animate({top:156,opacity: 0},"slow", "swing");
+			$(this).find('.cover').stop().animate({top:156},"slow", "swing");
+		}
+	},function(){
+		if($(this).find('.wrap').html() != ''){
+			//$(this).find('.cover').stop().animate({top:0,opacity: 100});
+			$(this).find('.cover').stop().animate({top:0},"slow", "swing");
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="title">
+	仿金山云产品服务效果 jQuery版本
+</div>
+<div id="box">
+    <h1>产品服务</h1>
+    <div class="cpBottom">
+    	<ul>
+        	<li>
+            	<div class="cover bg1">
+                </div>
+				<div class="wrap fc1">
+                	<p class="t1">
+						高性能云主机
+					</p>
+					<p>
+    					安全 便捷 付费灵活
+    				</p>
+					<p class="opt">
+    					<a class="fc1" href="javascript:;">免费试用</a>
+    					<a class="btn btn1" href="javascript:;">立即购买</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+            	<div class="cover bg2">
+                </div>
+				<div class="wrap fc2">
+                	<p class="t1">
+						标准储存服务
+					</p>
+					<p>
+    					无限制 多备份 低成本
+    				</p>
+					<p class="opt">
+    					<a class="btn btn2" href="javascript:;">立即购买</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+            	<div class="cover bg3">
+                </div>
+				<div class="wrap fc3">
+                	<p class="t1">
+						负载均衡
+					</p>
+					<p>
+    					高可用 高容错 零运维成本
+    				</p>
+					<p class="opt">
+    					<a class="btn btn3" href="javascript:;">立即试用</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+            	<div class="cover bg4">
+                </div>
+				<div class="wrap fc4">
+                	<p class="t1">
+						金山快盘商业版
+					</p>
+					<p>
+    					轻松办公，同步成长
+    				</p>
+					<p class="opt">
+    					<a class="btn btn4" href="javascript:;">立即购买</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="cpBottom">
+    	<ul>
+        	<li>
+            	<div class="cover bg5">
+                </div>
+				<div class="wrap"></div>
+            </li>
+            <li>
+            	<div class="cover bg6">
+                </div>
+				<div class="wrap"></div>
+            </li>
+            <li>
+            	<div class="cover bg7">
+                </div>
+				<div class="wrap"></div>
+            </li>
+            <li>
+            	<div class="cover bg8">
+                </div>
+				<div class="wrap fc8">
+                	<p class="t1">
+						金山快盘个人版
+					</p>
+					<p>
+    					多终端自动同步
+    				</p>
+					<p class="opt">
+    					<a class="btn btn8" href="javascript:;">立即使用</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

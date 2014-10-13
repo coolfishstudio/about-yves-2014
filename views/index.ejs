@@ -1,11 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+<meta charset="utf-8">
+<title>IT酷鱼网 | Yves个人作品网 -- 20140501版</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script src="js/MyQuery.js" ></script>
+<script src="js/MyCommon.js" ></script>
+<script>
+$(function(){
+	(function(){
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var l = oEvent.clientX;
+			var t = oEvent.clientY;
+			$('.body_cc').css({top : t + 10 + 'px', left : l + 10 + 'px'});
+		};	
+	})();	
+	(function(){
+		var timer = null;
+		var falg = false;
+		var f = false;
+		var agent = '未知';
+		var image = [
+				'/img/bar-green.gif',
+				'/img/bar-green.png',
+				'/img/bd.jpg',
+				'/img/bg.jpg',
+				'/img/bg_case.png',
+				'/img/bg_case_f.png',
+				'/img/bg_case_title.png',
+				'/img/box_b.png',
+				'/img/box_m.png',
+				'/img/box_t.png',
+				'/img/box2_b.png',
+				'/img/box2_m.png',
+				'/img/box2_t.png',
+				'/img/box3_bg1.png',
+				'/img/box3_bg2.png',
+				'/img/box3_bg3.png',
+				'/img/box3_m.png',
+				'/img/findme.png',
+				'/img/foot_bg.png',
+				'/img/jl_btn.png',
+				'/img/logo.png',
+				'/img/marker.png',
+				'/img/menu_article.png',
+				'/img/menu_article_on.png',
+				'/img/menu_cases.png',
+				'/img/menu_cases_on.png',
+				'/img/menu_communication.png',
+				'/img/menu_communication_on.png',
+				'/img/menu_homepage.png',
+				'/img/menu_homepage_on.png',
+				'/img/menu_personage.png',
+				'/img/menu_personage_on.png',
+				'/img/my_0.jpg',
+				'/img/my_1.jpg',
+				'/img/my_2.jpg',
+				'/img/my_3.jpg',
+				'/img/my_4.jpg',
+				'/img/page.png',
+				'/img/page_more.png',
+				'/img/pointer-green.png',
+				'/img/pxs_bg1.png',
+				'/img/pxs_bg2.png',
+				'/img/pxs_bg3.png',
+				'/img/readmore-icon.png',
+				'/img/sc_top_bg.png',
+				'/img/skills.png',
+				'/img/skills_0.png',
+				'/img/skills_1.png',
+				'/img/skills_2.png',
+				'/img/skills_3.png',
+				'/img/skills_4.png',
+				'/img/skills_5.png',
+				'/img/slider_1.png',
+				'/img/slider_2.png',
+				'/img/slider_3.png',
+				'/img/slider_4.png',
+				'/img/slider_5.png',
+				'/img/text_here.png',
+				'/img/text_message.png',
+				'/img/text_myworks.png',
+				'/img/text_profile.png',
+				'/img/text_project.png',
+				'/img/top_1.png',
+				'/img/top_2.png',
+				'/img/top_3.png',
+				'/img/top_4.png',
+				'/img/top_bg.png',
+				'/img/zoom-icon.png',
+				'/img/xm/xm_s_01.png',
+				'/img/xm/xm_s_02.png',
+				'/img/xm/xm_s_03.png'
+			];
+		timer = setInterval(function(){
+			if(falg){
+				clearInterval(timer);
+				
+				var timer2 = null;
+				var i = 0;
+				timer2 = setInterval(function(){
+					if(i >= image.length){
+						clearInterval(timer2);
+						$('#image_bfb').html(parseInt(i / image.length * 100) + '%');
+						$('#image_f').html('允许通过');
+						$('.body_cc div').eq(2).css({display:'block'});
+						var timer3 = null;
+						var time = 2;
+						timer3 = setInterval(function(){
+							$('#time_f').html(time);
+							if(time == 0){
+								clearInterval(timer3);
+								window.location.href = '/homepage';
+							}
+							time--;
+						},1000);
+					}else{
+						var img = new Image(); //创建一个Image对象，实现图片的预下载
+						img.src = 'http://yves.coolfishstudio.com' + image[i];
+						$('#image_bfb').html(parseInt(i / image.length * 100) + '%');
+						i++;	
+					}					
+				},30); 		
+		
+			}
+			if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1){
+				agent = '火狐';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('chrome') != -1){
+				agent = '谷歌';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('msie 10.0') != -1){
+				agent = 'IE10';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('msie 9.0') != -1){
+				agent = 'IE9';
+				f = true;
+			}else if(navigator.userAgent.toLowerCase().indexOf('msie 8.0') != -1){
+				agent = 'IE8';
+			}else if(navigator.userAgent.toLowerCase().indexOf('msie 7.0') != -1){
+				agent = 'IE7';
+			}else if(navigator.userAgent.toLowerCase().indexOf('msie 5.5') != -1){
+				agent = 'IE6';
+			}else if(navigator.userAgent.toLowerCase().indexOf('rv:11.0') != -1){
+				agent = 'IE11';
+				f = true;
+			}else{
+				
+			}
+			$('#agent').html(agent);
+			if(f){
+				$('#agent_f').html('允许通过');
+				falg = true;
+				$('.body_cc div').eq(1).css({display:'block'});
+			}else{
+				$('#agent_f').html('不允许通过');
+				clearInterval(timer);
+				$('.body_cc div').eq(3).css({display:'block'});
+			}
+		},1000);	
+		
+		 
+	})();
+});
+</script>
+</head>
+
+<body>
+<div class="body">
+	<div class="body_bg">
+        <div class="body_cc">
+            <div>1.校验你的浏览器是<span id="agent" class="body_cc_font">待测</span><span id="agent_f"></span></div>
+            <div style="display:none">2.加载图片<span id="image_bfb" class="body_cc_font"></span><span id="image_f"></span></div>
+            <div style="display:none">3.<span id="time_f" class="body_cc_font">3</span>秒后进入网站</div>
+            <div style="display:none">2.请使用谷歌、火狐或IE9+浏览器进行访问</div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

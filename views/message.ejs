@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IT酷鱼网 | Yves个人作品网 -- 20140501版</title>
+<link href="/css/common.css" rel="stylesheet" type="text/css" />
+<script src="http://webapi.amap.com/maps?v=1.2&key=6fa5887a441735f70a531517a673af7c" type="text/javascript"></script>
+<script type="text/javascript" src="http://counter.sina.com.cn/ip/" charset="utf-8"></script>
+<script src="/js/MyQuery.js" ></script>
+<script src="/js/MyCommon.js" ></script>
+<script>
+$(function(){
+	(function(){
+		var iMenuNum = 4;
+		toMenu(iMenuNum);//封装后的公共菜单事件
+	})();
+	//地图
+	(function(){
+		var startLngLat = {x:116.428524,y:40.073573};   
+		var endLngLat = {x:116.428524,y:40.073573};   
+		var mapObj;
+		var point = new AMap.LngLat(startLngLat.x,startLngLat.y);
+		function mapInit(){   //初始化地图对象，加载地图。
+			mapObj = new AMap.Map('myMap',{
+				center : point, //地图中心点
+				level : 15  //地图显示的缩放级别
+			});
+			//增加工具条
+			mapObj.plugin(['AMap.ToolBar','AMap.OverView','AMap.Scale'],function(){  
+				//加载工具条  
+			  	tool = new AMap.ToolBar({  
+					direction : true,//隐藏方向导航  
+					ruler : true,//隐藏视野级别控制尺  
+					autoPosition : false//禁止自动定位  
+			  	});  
+			  	mapObj.addControl(tool);  
+			  	//加载鹰眼  
+			  	view = new AMap.OverView();  
+			  	mapObj.addControl(view);  
+			  	//加载比例尺  
+			  	scale = new AMap.Scale();  
+			  	mapObj.addControl(scale);  
+			});  
+			var marker = new AMap.Marker({
+				icon : new AMap.Icon({    //复杂图标  
+					size : new AMap.Size(28,35),//图标大小  
+					image : "/img/marker.png", //icon地址  
+					imageOffset : new AMap.Pixel(-14,0)//相对于大图的取图位置  
+				}),  
+				position : mapObj.getCenter()
+			});
+			marker.setMap(mapObj);
+			marker.setAnimation('AMAP_ANIMATION_BOUNCE'); //设置点标记的动画效果，此处为弹跳效果  
+    		marker.setTitle('我是于春宇，目前我在这里...'); //设置鼠标划过点标记显示的文字提示 
+			
+			var findmeControl = new AMap.findmeControl(mapObj); //新建自定义插件对象  
+   			mapObj.addControl(findmeControl);                  //地图上添加插件  		
+		}
+		//自定义组件
+		//定义一个插件类 homeControlDiv，AMap为命名空间                  
+		AMap.findmeControl = function(){};  
+		AMap.findmeControl.prototype = {
+			addTo : function(map, dom){
+				dom.appendChild(this._getHtmlDom(map));
+		    },  
+		   	_getHtmlDom : function(map){                
+				this.map = map;                
+			 	// 创建一个能承载控件的<div>容器                
+			 	var controlUI = document.createElement("div");                 
+			 	controlUI.style.width = '30px';     //设置控件容器的宽度
+				controlUI.style.height = '30px';    //设置控件容器的高度                
+				controlUI.style.background = 'url(/img/findme.png)';                                 
+				controlUI.style.cursor = 'pointer';                
+				controlUI.style.textAlign = 'center';                 
+				controlUI.title = "发现我";  
+			 	// 设置控件的位置                 
+			 	controlUI.style.position='absolute';                
+			 	controlUI.style.left='60px';     //设置控件离地图的左边界的偏移量                
+			 	controlUI.style.top='20px';        //设置控件离地图上边界的偏移量                
+			 	controlUI.style.zIndex='300';     //设置控件在地图上显示                
+			 	// 设置控件响应点击onclick事件                
+			 	controlUI.onclick=function(){                
+					map.setCenter(new AMap.LngLat(startLngLat.x,startLngLat.y));                
+			 	}                
+			 	return controlUI;                
+			}                
+		};
+		mapInit();
+	})();
+});
+
+</script>
+</head>
+
+<body>
+<div class="body">
+	<div class="top">
+		<div class="logo">
+        	<div class="sc">
+            	<div class="item">
+    				<div>
+                    	<a href="###">
+                    		<div class="item_content" title="联系电话">
+                        		18210088607
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+                            	<img alt="" src="/img/top_4.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_4.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+    	                	<div class="item_content" title="我的QQ">
+        		                QQ:461836324
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_3.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_3.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+                    		<div class="item_content" title="我的姓名">
+                        		于春宇
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_2.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_2.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                
+            </div>
+        </div>
+		<div class="menu" id="menu">
+			<ul>
+				<li><a href="/homepage" style="background-image:url(/img/menu_homepage.png);"></a></li>
+				<li><a href="/profile" style="background-image:url(/img/menu_personage.png);"></a></li>
+				<li><a href="/blog" style="background-image:url(/img/menu_article.png);"></a></li>
+				<li><a href="/works" style="background-image:url(/img/menu_cases.png);"></a></li>
+				<li><a href="/message" style="background-image:url(/img/menu_communication.png);"></a></li>
+			</ul> 
+			<div class="menu_slider">
+				<div class="menu_slider_bar" id="menuSliderBar"></div>
+				<div class="menu_slider_pointer" id="menuSliderPointer"></div>
+			</div>
+		</div>
+    </div>
+    <div class="center">
+    	<div class="clear"></div>
+    	<div class="center_box">
+        	<div class="box_t"></div>
+        	<div class="box_m">
+            	<div class="box_area">
+                	<img class="fl inline" src="/img/text_here.png" />
+                </div>
+            </div>
+            <div class="box_b"></div>
+            <div class="box_t"></div>
+            <div class="box_m">
+                <div class="box_area">
+                	<div class="message_map" id="myMap" style="height:500px;">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="box_b"></div>
+    	</div>
+    </div>
+    <div class="foot">Yves个人网站&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/">京ICP备14019006号</a>&nbsp;&nbsp;|&nbsp;&nbsp;联系方式：18210088607&nbsp;&nbsp;|&nbsp;&nbsp;QQ:461836324&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+</div>
+</body>
+</html>

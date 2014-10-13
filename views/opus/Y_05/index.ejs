@@ -1,0 +1,599 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>问卷评估</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+	top:0;
+}
+.bg{
+	width:740px;
+	background:#ffffff;
+	border:2px solid #FFF;
+	margin:50px auto;
+	box-shadow:5px 5px 10px #333333;
+}
+.ks{
+	display:_none;	
+	padding: 30px 40px;
+}
+.pg{
+	display:none;
+	padding: 30px 40px;
+}
+
+.wjtitle{
+	margin-top: 20px;
+	text-align: center;
+}
+.wjtitle h1{
+	color: #4C4C4C;
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+.wjintro{
+	word-break: normal;
+	color: #666;
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: "微软雅黑";
+	margin-top: 20px;
+}
+
+.wjhr{
+    width: 100%;
+    height: 3px;
+    background-color: #009DE0;
+    margin-top: 20px;
+}
+.wjques{
+	padding-left: 15px;
+	margin-top: 30px;
+	word-break: normal;
+	color: #666;
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: "微软雅黑";
+}
+.wjques_title{
+	font-size: 16px;
+	margin-left: -15px;
+	padding-bottom: 8px;
+	position: relative;
+	padding-left: 5px;
+}
+.wjques_matrix{
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.wjques_bot{
+	padding-bottom: 5px;
+}
+.red{
+	font-size: 14px;
+	color: #ff0000;
+}
+.icheckbox_div{
+	position: relative;
+	padding-bottom: 10px;
+	color: #666;
+	font-size: 14px;
+	line-height: 1.4;
+    font-family: "微软雅黑";
+}
+.icheckbox_div span{ 
+	width:18px; 
+	height:18px; 
+	display:inline-block;
+	background:url(/opus/Y_05/img/radio.png) no-repeat;
+}
+.icheckbox_div span.on{ 
+	background:url(/opus/Y_05/img/radio.png) no-repeat 0 -23px;
+}
+.wjcenter{
+	width:100%;
+	text-align:center;
+}
+.wjbutton{
+	color: #F7F7F7;
+	background: none repeat scroll 0% 0% #009DE0;
+	font-weight: bold;
+	display: inline-block;
+	vertical-align: baseline;
+	margin: 10px 2px;
+	outline: medium none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: normal;
+	padding: 6px 16px;
+	border-radius: 5px;
+	border: medium none;
+}
+#tmp_mb{
+	display:none;
+}
+
+.pg_title{
+	overflow:hidden;
+	margin-top: 7px;
+}
+.pg_fenshu{
+	float:left;
+	height: 134px;
+	width:134px;
+	margin: 7px;
+	background:url(/opus/Y_05/img/1.png);
+}
+.pg_center{
+	padding: 10px;
+	border: 1px #e3e3e3 dashed;	
+}
+.pg_jieguo{
+	margin: 10px;
+	height: 114px;
+	text-align:center;
+	line-height:114px;
+}
+.pg_jieguo label{
+	color:#00cc00;
+	font-family:'微软雅黑';
+	font-size:24px;
+	font-weight:bold;
+}
+.pg_guntiao{
+	float:left;
+	height: 134px;
+	width:434px;
+	margin: 7px;
+	position:relative;
+}
+.pg_guntongtiao{
+	margin: 7px;
+	width:417px;
+	height:23px;
+	margin-bottom:20px;
+	bottom:0;
+	position:absolute;
+	background:url(/opus/Y_05/img/progress_bar_bg.png);
+}
+.pg_neirong{
+	margin: 7px;
+	width:417px;
+	line-height:60px;
+	height:60px;
+	top:0;
+	position:absolute;
+	color:#00cc00;
+	font-family:'微软雅黑';
+	font-size:28px;
+	font-weight:bold;
+}
+.pg_gt{
+	height:100%;
+	overflow:hidden;
+	width:0px;
+	background:url(/opus/Y_05/img/progress_bar_green.png);
+}
+.pg_center_title{
+	color:#000000;
+	font-family:'微软雅黑';
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	height:20px;
+	line-height:20px;
+}
+.pg_center_title span{
+	display:block;
+	float:left;
+	margin:3px;
+}
+.pg_center_xinxi{
+	color:#333333;
+	font-family:'微软雅黑';
+	font-size:13px;
+	clear:both;
+	height:20px;
+	line-height:20px;
+}
+.pg_center_xinxi div{
+	display:block;
+	float:left;
+	margin:3px;
+	
+}
+.pg_center_bh{
+	width:60px;
+}
+.pg_center_tm{
+	width:385px;
+}
+.pg_center_zq{
+	width:80px;
+}
+.pg_center_da{
+	width:80px;
+}
+.pg_l{
+	text-align:left;
+}
+.pg_c{
+	text-align:center;
+}
+.pg_center_tm_icon{
+	width:20px;
+	height:18px;
+}
+.pg_icon_l1{
+	background:url(/opus/Y_05/img/l1.jpg) no-repeat;
+}
+.pg_icon_l2{
+	background:url(/opus/Y_05/img/l2.jpg) no-repeat;
+}
+.dis{
+	display:none;
+}
+</style>
+<script>
+var util = {
+	radio : function(name){
+		var aInput = document.getElementsByName(name);
+		var arr = [];
+		for(var i = 0; i < aInput.length; i++){
+			var oSpan = document.createElement('span');
+			arr.push(oSpan);
+			(function(index){
+				oSpan.onclick = function(){
+					for(var i = 0; i < arr.length; i++){
+						arr[i].className = '';
+					}
+					this.className = 'on';
+					aInput[index].checked = true;	
+				}
+			})(i);
+			aInput[i].parentNode.insertBefore(oSpan,aInput[i]);
+			aInput[i].style.display = 'none';
+		}	
+	},
+	findArr : function(arr,n){
+		for(var i = 0; i < arr.length; i++){
+			if(arr[i] == n) return true;
+		}
+		return false;
+	},
+	radioAll :  function(id){
+		var oBox = document.getElementById(id);
+		var aInput = oBox.getElementsByTagName('input');
+		var arr = [];
+		for(var i = 0; i < aInput.length; i++){
+			if(aInput[i].type == 'radio'){
+				//zns_radio(aInput[i].name);	
+				if(!util.findArr(arr,aInput[i].name)){
+					arr.push(aInput[i].name);	
+				}
+			}
+		}
+		for(var i = 0; i < arr.length; i++){
+			util.radio(arr[i]);
+		}	
+	},
+	dumpEle : function(obj, data){
+		var oTmp = document.createElement('div');
+		oTmp.innerHTML = obj.outerHTML.replace(/\{\$\w+\}/g,function(s){
+			s = s.substring(2, s.length-1);
+			return data[s];
+		});
+		oTmp.children[0].id = '';
+		return oTmp.children[0];
+	},
+	radioCheck : function(name){
+		var radio = document.getElementsByName(name);
+   		for(var i = 0; i < radio.length; i++){
+			if(radio.item(i).checked == true){
+				return radio.item(i).value;
+			}
+		}
+		return null;
+	},
+	getStyle : function(obj,name){
+		return (obj.currentStyle || getComputedStyle(obj,false))[name];
+	},
+	animate : function(obj,json){
+		clearInterval(obj.timer);
+		//总次数
+		var count = Math.floor(700 / 30);
+		var start = {};//起始位置
+		var dis = {};//总距离
+		for(var name in json){
+			if(name=='opacity'){
+				start[name] = Math.round(parseFloat(util.getStyle(obj,name))*100);
+			}else{
+				start[name] = parseInt(util.getStyle(obj,name));
+			}
+			dis[name] = json[name] - start[name];
+		}
+		//记录步数
+		var n = 0;
+		//开始运动
+		obj.timer = setInterval(function(){
+			n++;
+			for(var name in json){
+				//运动
+				var a = 1 - n / count;
+				var cur = start[name] + dis[name] * (1 - a * a * a);
+				if(name == 'opacity'){
+					obj.style.opacity = cur / 100;
+					obj.style.filter = 'alpha(opacity:' + cur + ')';
+				}else{
+					obj.style[name]	= cur + 'px';
+				}
+			}
+			if(n==count){
+				clearInterval(obj.timer);	
+			}
+		},30);
+	}
+};
+window.onload = function(){
+	var count = 4;//个数
+	var tk = [//题库
+	{id:1,name:'js_1',title:'下面属于window对象的是:',cvalue_a:'history',cvalue_b:'document',cvalue_c:'location',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:2,name:'js_2',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:3,name:'js_3',title:'下面不属于表单元素的是:',cvalue_a:'text',cvalue_b:'link',cvalue_c:'textarea',cvalue_d:'select',tvalue:'b'},
+	{id:4,name:'js_4',title:'正确获取表单myform中文本框txt的值的是:',cvalue_a:'document.all.txt.value',cvalue_b:'form.myform.txt.value',cvalue_c:'document.myform.txt.value',cvalue_d:'document.getElementsByName("txt").value',tvalue:'c'},
+	{id:5,name:'js_5',title:'函数parseInt(15.36)的值是:',cvalue_a:'15',cvalue_b:'16',cvalue_c:'15.4',cvalue_d:'15.36',tvalue:'a'},
+	{id:6,name:'js_6',title:'函数parseInt(18.98)的值是:',cvalue_a:'18.98',cvalue_b:'19',cvalue_c:'18',cvalue_d:'"18.98"',tvalue:'c'},
+	{id:7,name:'js_7',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:8,name:'js_8',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:9,name:'js_9',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:10,name:'js_10',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:11,name:'js_11',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:12,name:'js_12',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:13,name:'js_13',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:14,name:'js_14',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'},
+	{id:15,name:'js_15',title:'下面属于document对象的是:',cvalue_a:'form',cvalue_b:'link',cvalue_c:'anchor',cvalue_d:'以上全部都是',tvalue:'d'}
+	];
+	//随机抽取题库
+	var kt = []; 
+	(function(){
+		var oBox = document.getElementById('question_box');
+		//记录模版
+		var oTmpDiv = document.getElementById('tmp_mb');
+		oBox.removeChild(oTmpDiv);
+		
+		for(var i = 0 ; ; i++){ 
+			if(kt.length < count){ 
+				  getRandom(tk.length); 
+			}else{ 
+			  break; 
+		   } 
+		} 
+		//生成考题
+		for(var i = 0; i < kt.length; i++){
+			kt[i].num = i + 1;
+			var oNewDiv = util.dumpEle(oTmpDiv,kt[i]);
+			oBox.appendChild(oNewDiv);
+		}
+		//修改样式
+		util.radioAll('question_box');
+		function getRandom(rcount){ 
+			var rand = parseInt(Math.random() * rcount); 
+			for(var i = 0 ; i < kt.length; i++){ 
+				 if(kt[i].id == tk[rand].id){ 
+					  return false; 
+				 }      
+			} 
+			kt.push(tk[rand]); 
+		} 
+	})();
+	(function(){//提交
+		var oBtn = document.getElementById('button');
+		var oBox = document.getElementById('question_box');
+		var oKs = document.getElementById('ks');
+		var oPg = document.getElementById('pg');
+		oBtn.onclick = function(){
+			var bFlag = true;
+			for(var i = 0; i < kt.length; i++){
+				var oRed = document.getElementById(kt[i].id + '_red');
+				var oDa = util.radioCheck(kt[i].name);
+				if(!oDa){
+					bFlag = false;
+					oRed.innerHTML = '请选择你的答案';
+				}else{
+					oRed.innerHTML = '';
+					kt[i].nvalue = oDa;
+				}
+			}
+			if(bFlag){
+				alert('提交答案中...');
+				oKs.style.display = 'none';
+				oPg.style.display = 'block';
+			}
+		};
+	})();
+	(function(){
+		var oBtn = document.getElementById('pgButton');
+		var oBox = document.getElementById('pg_center');
+		var oFs = document.getElementById('fs');
+		var oGt = document.getElementById('gt');
+		var oNr = document.getElementById('nr');
+		var oFsImg = document.getElementById('pg_fenshu');
+		var oTmpDiv = document.getElementById('tmp_center');//记录模版
+		oBox.removeChild(oTmpDiv);
+		var oFhText = document.getElementById('fhText');
+		var timer= null;
+		oBtn.onclick = function(){
+			clearInterval(timer); 
+			//alert(JSON.stringify(kt));//考题
+			oBtn.style.display = 'none';
+			oFhText.style.display = 'block';
+			var i = 0;
+			var iNow = 2;
+			var err = 0;
+			oNr.innerHTML = '正在检测第1题。。。';	
+			oFsImg.style.background = 'url(img/1.gif)';
+			var cj = 100;
+			timer = setInterval(function(){
+				if(i >= kt.length){
+					oNr.innerHTML = '检测结束。。。';
+					if(cj >= 60){
+						oFsImg.style.background = 'url(/opus/Y_05/img/1.png)';
+					}else if(cj <= 30){
+						oFsImg.style.background = 'url(/opus/Y_05/img/3.png)';
+					}else{
+						oFsImg.style.background = 'url(/opus/Y_05/img/2.png)';
+					}
+
+					clearInterval(timer); 
+				}else{
+					iNow++;
+					if(kt[i].nvalue != kt[i].tvalue){
+						kt[i].err = 'red';	
+						kt[i].icon = 'l2';	
+						err++;
+					}else{
+						kt[i].err = '';	
+						kt[i].icon = 'l1';	
+					}
+					//console.log(i+"："+iNow);
+					oNr.innerHTML = '正在检测第' + (i+1) +'题。。。';
+					cj = parseInt(100 - err * 100 / kt.length);
+					oFs.innerHTML = cj + '分';
+					
+					if(cj >= 60){
+						oNr.style.color = '#00cc00';
+						oFs.style.color = '#00cc00';
+						oFsImg.style.background = 'url(/opus/Y_05/img/1.gif)';
+						oGt.style.background = 'url(/opus/Y_05/img/progress_bar_green.png)';
+					}else if(cj <= 30){
+						oNr.style.color = '#ff0000';
+						oFs.style.color = '#ff0000';
+						oFsImg.style.background = 'url(/opus/Y_05/img/3.gif)';
+						oGt.style.background = 'url(/opus/Y_05/img/progress_bar_red.png)';
+					}else{
+						oNr.style.color = '#ff6600';
+						oFs.style.color = '#ff6600';
+						oFsImg.style.background = 'url(/opus/Y_05/img/2.gif)';
+						oGt.style.background = 'url(/opus/Y_05/img/progress_bar_orange.png)';
+					}
+					util.animate(oGt,{width:parseInt(417 * (i + 1) / kt.length)});
+					var oNewDiv = util.dumpEle(oTmpDiv,kt[i]);
+					oBox.appendChild(oNewDiv);
+					i++;
+				}
+			},400 * Math.random() + 600);
+		};
+	})();
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	利用命名空间封装工具方法，使用了模版方式生成考题，实现问卷评估系统
+</div>
+<div class="bg">
+	<div id="ks" class="ks">
+    	<div class="wjtitle">
+        	<h1>
+                简单的在线答题
+            </h1>
+        </div>
+		<div class="wjintro">
+         模拟在线答题项目，随机从题库抽取考题进行测试，测试结果将以360体检效果出现。
+        </div>
+		<div class="wjhr"></div>
+        <div id="question_box">
+            <div id="tmp_mb">
+                <div id="{$id}" class="wjques">
+                    <div class="wjques_title">            
+                        {$num}.{$title}
+                    </div>
+                    <div class="wjques_matrix">
+                        <div id="{$id}_red" class="wjques_bot red"></div>
+                        <div class="icheckbox_div" style="">
+                            <input type="radio" value="a" name="{$name}">{$cvalue_a}&nbsp;&nbsp;
+                            <input type="radio" value="b" name="{$name}">{$cvalue_b}&nbsp;&nbsp;
+                            <input type="radio" value="c" name="{$name}">{$cvalue_c}&nbsp;&nbsp;
+                            <input type="radio" value="d" name="{$name}">{$cvalue_d}&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+       	</div>
+        <div class="wjcenter">
+       		<div class="wjhr"></div>
+        	<div id="button" class="wjbutton">
+       			提    交   
+        	</div>
+        </div>
+    </div>
+    <div id="pg" class="pg">
+    	<div class="pg_title">
+        	<div class="pg_fenshu" id="pg_fenshu">
+            	<div class="pg_jieguo">
+                	<label id="fs">评估</label>
+               	</div>
+            </div>
+            <div class="pg_guntiao">
+            	<div class="pg_neirong" id="nr">
+                	准备检测。。。
+                </div>
+            	<div class="pg_guntongtiao">
+                	<div class="pg_gt" id="gt"></div>
+                </div>
+            </div>
+        </div>
+        <div class="pg_center" id="pg_center">
+        	<div class="pg_center_title">
+                <span class="pg_center_bh">编号</span>
+                <span class="pg_center_tm">题目</span>
+                <span class="pg_center_zq">正确答案</span>
+                <span class="pg_center_da">你的答案</span>
+            </div>
+            <div id="tmp_center">
+            	<div class="pg_center_xinxi">
+                    <div class="pg_center_bh pg_c">{$num}</div>
+                    <div class="pg_center_tm pg_l">
+                    	<div class="pg_center_tm_icon pg_icon_{$icon}">
+                        </div>
+                        <div>
+                    		{$title}
+                        </div>
+                    </div>
+                    <div class="pg_center_zq pg_c">{$tvalue}</div>
+                    <div class="pg_center_da pg_c {$err}">{$nvalue}</div>
+                </div>
+            </div>
+        </div>
+        <div class="wjcenter">
+       		<div class="wjhr"></div>
+        	<div id="pgButton" class="wjbutton">
+       			开    始   
+        	</div>
+            <div id="fhText" class="wjbutton dis">
+       			此在线考试系统的数据存放数组里，仅为测试效果。   
+        	</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

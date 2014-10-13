@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>三环旋转解锁特效</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;font-family: Verdana,Arial,Helvetica,'Microsoft YaHei',sans-serif;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+#box{
+	width: 400px;
+	height:400px; 	
+	border: 1px solid #333333; 
+	margin: 100px auto 0; 
+	background:#333333;
+	overflow:hidden;
+	box-shadow:5px 5px 10px #333333;
+	border-radius:50%;
+}
+.rad{
+	border: 1px solid #000000;
+	border-radius:50%;
+	background:#ffffff url(/opus/H_01/img/bg.jpg) center center no-repeat;
+	cursor:pointer;
+}
+.w380{
+	margin:10px auto;
+	width: 380px;
+	height:380px; 
+}
+.w280{
+	margin:50px auto;
+	width: 280px;
+	height:280px; 
+}
+.w180{
+	margin:50px auto;
+	width: 180px;
+	height:180px; 
+}
+.w80{
+	margin:50px auto;
+	width: 80px;
+	height:80px; 
+}
+</style>
+<script>
+function setStyle3(obj,name,value){
+	var str=name.charAt(0).toUpperCase()+name.substring(1);
+
+	obj.style['Webkit'+str]=value;
+	obj.style['Moz'+str]=value;
+	obj.style['ms'+str]=value;
+	obj.style['O'+str]=value;
+	obj.style[name]=value;
+}
+window.onload=function(){
+	var oW380=document.querySelector('.w380');
+	var oW280=document.querySelector('.w280');
+	var oW180=document.querySelector('.w180');
+	var oW80=document.querySelector('.w80');
+	
+	setStyle3(oW80,'transform','rotate(45deg)');
+	setStyle3(oW180,'transform','rotate(45deg)');
+	setStyle3(oW280,'transform','rotate(45deg)');
+	setStyle3(oW380,'transform','rotate(0deg)');
+
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	
+</div>
+<div id="box">
+	<div class="rad w380">
+        <div class="rad w280">
+            <div class="rad w180">
+            	<div class="rad w80"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

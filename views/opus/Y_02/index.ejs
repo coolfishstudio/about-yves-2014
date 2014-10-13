@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>爱情公寓3--为你喜欢的角色投票吧</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;}
+.bg{
+	width:100%;
+	height:100%;
+	background:url(/opus/Y_02/img/bg.jpg) no-repeat;
+	overflow:hidden;
+}
+h1{
+	font-size: 40px;
+	line-height: 40px;
+	font-family: "微软雅黑";
+	padding:80px 0px 0px 80px ;
+}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+#box{
+	width:212px;
+	border:5px solid #fff;
+	overflow:hidden;
+	zoom:1;
+	background:#fff;
+	border-radius:5px;
+	margin:40px 200px; 
+	padding:5px 0 3px 3px;
+}
+#box li{
+	float:left;
+	margin:0px 3px 0 0;
+}
+#box li img{
+	width:50px;
+	height:50px;
+}
+#box .first{
+	position:relative;
+}
+#box .first img{
+	width:154px;
+	height:154px;
+	border:1px #a3a3a3 solid;
+}
+#box .first div{
+	position:absolute;
+	top:0;
+	left:0;
+	width:156px;
+	height:156px;
+	display:none;
+	opacity:0.5;
+	filter:alpha(opacity=50);
+	background:#fff url(/opus/Y_02/img/loading.gif)50% 50% no-repeat;
+}
+#tj{
+	position:absolute;
+	left:655px;
+	top:390px;
+	cursor:pointer;
+}
+#tj img{
+	width:64px;
+	height:44px;
+}
+</style>
+<script>
+window.onload = function(){
+	(function(){
+		var oBox = document.getElementById('box');
+		var oDiv = oBox.getElementsByTagName("div")[0];
+		var oImg = oBox.getElementsByTagName('img');
+		var timer = null;
+		for(var i = 1; i < oImg.length; i++){
+			oImg[i].onmouseover = function(){
+				this.style.border = '2px #f60 solid';//border:1px #000 solid;
+				this.style.width = '46px';
+				this.style.height = '46px';
+			};
+			oImg[i].onmouseout = function(){
+				this.style.border = '';
+				this.style.width = '50px';
+				this.style.height = '50px';
+			};
+			oImg[i].onclick = function(){
+				clearInterval(timer);
+				var temp = this.src.replace(/small/,"big");
+				oDiv.style.display = "block";
+				timer = setInterval(function(){
+					oDiv.style.display = "none";
+					oImg[0].src = temp; 
+					clearInterval(timer);
+				},500);
+			};
+		}
+	})();
+	(function(){
+		var oTj = document.getElementById('tj').getElementsByTagName("img")[0];
+		var oImg = document.getElementById('box').getElementsByTagName('img')[0];
+		
+		var arrName = ['曾小贤','胡一菲','诺澜','吕子乔','张伟','陈美嘉','关谷神奇','唐悠悠','陆展博','秦羽墨','林宛瑜'];
+		
+		var timer = null;
+		var n = 0;
+		var bFlag = true;
+		timer = setInterval(function(){
+			n++;
+			if(n%2){
+				oTj.style.width = '64px';
+				oTj.style.height = '44px';
+				oTj.style.marginTop = '0';
+				oTj.style.marginLeft = '0';
+			}else{
+				oTj.style.width = '80px';
+				oTj.style.height = '55px';
+				oTj.style.marginTop = '-6px';
+				oTj.style.marginLeft = '-8px';
+			}
+		},600);
+		oTj.onclick = function(){
+			if(bFlag){
+				clearInterval(timer);
+				oTj.style.width = '64px';
+				oTj.style.height = '44px';
+				oTj.style.marginTop = '0';
+				oTj.style.marginLeft = '0';
+				bFlag = false;
+				alert('你将票投给了 ' + arrName[oImg.src.split(/big_|\.gif/)[1]-1] +' 的扮演者，\n他饰演的角色是你心目中最喜欢的角色。');
+			}else{
+				alert('抱歉，该活动本次已结束，若要再行测试，请刷新页面。');	
+			}
+			
+		};
+	})();
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	简单的选项卡
+</div>
+<div class="bg">
+	<h1>《爱情公寓3》为你喜欢的角色投票吧</h1>
+	<ul id="box">
+	    <li class="first"><img src="/opus/Y_02/img/big_1.gif"><div></div></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_1.gif"></a></li>
+    	<li><a href="javascript:;"><img src="/opus/Y_02/img/small_2.gif"></a></li>
+    	<li><a href="javascript:;"><img src="/opus/Y_02/img/small_3.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_4.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_5.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_6.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_7.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_8.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_9.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_10.gif"></a></li>
+        <li><a href="javascript:;"><img src="/opus/Y_02/img/small_11.gif"></a></li>
+    </ul>
+    <div id="tj"> 
+    	<img src="/opus/Y_02/img/tj.png">
+    </div>
+</div>
+</body>
+</html>

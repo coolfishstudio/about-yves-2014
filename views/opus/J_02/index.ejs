@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>倒计时的幻灯片</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;}
+.bg{
+	width:600px; 
+	height:300px; 
+	position:relative; 
+	margin:150px auto;
+	overflow:hidden;
+	box-shadow:5px 5px 10px #333333;
+}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+.bg ul{
+	position:absolute; 
+	left:0; 
+	top:0;
+	width:3000px;
+}
+.bg ul li{
+	width:600px;
+	height:300px; 
+	float:left;
+}
+.bg ol{
+	width:460px; 
+	position:absolute; 
+	left:50%; 
+	margin-left:-230px; 
+	bottom:10px;
+}
+.bg ol li{
+	width:70px; 
+	height:5px; 
+	border:1px solid #000000; 
+	background:#ffffff; 
+	float:left; 
+	position:relative; 
+	margin:10px;
+}
+.bg ol li span{
+	position:absolute;
+	left:0;
+	top:0;
+	width:0;
+	background:#ff9900;
+	height:5px;
+}
+</style>
+<script src="/opus/J_02/js/jquery-1.7.2.js"></script>
+<script>
+$(function(){
+	var iNow = 0;
+	function djs(){
+		$('.bg ol li').find('span').eq(iNow).stop().animate({width : 70},2000,'',function(){
+			iNow++;
+			if(iNow == $('.bg ol li').length){
+				iNow = 0;
+			}
+			$('.bg ul').stop().animate({left : -parseInt($('.bg ul li').eq(0).css('width')) * iNow},'show');
+			$('.bg ol li').find('span').css({width:0});
+			djs();
+		});	
+	}
+	djs();
+});
+</script>
+</head>
+
+<body>
+<div class="title">
+	倒计时的幻灯片 利用jquery完成
+</div>
+<div class="bg">
+	<ul>
+    	<li style="background:url(/opus/J_02/img/001.jpg);"></li>
+        <li style="background:url(/opus/J_02/img/002.jpg);"></li>
+        <li style="background:url(/opus/J_02/img/003.jpg);"></li>
+        <li style="background:url(/opus/J_02/img/004.jpg);"></li>
+        <li style="background:url(/opus/J_02/img/005.jpg);"></li>
+    </ul>
+    <ol>
+    	<li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+    </ol>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>模拟无限瀑布流</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;}
+a{text-decoration:none;color:#444444;}
+a:hover{color:#999999;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc; font-family: Verdana,Arial,Helvetica,'微软雅黑',sans-serif;}
+.bg{
+	width: 1200px;
+	height:auto;
+	position:relative; 
+	margin:80px auto;
+	box-shadow:5px 5px 10px #333333;
+}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+	top:0;
+}
+.bg ul{
+	width:280px;
+	height:auto;
+	border:none;
+	float:left; 
+	margin:10px;
+}
+
+.bg ul li {
+	width:280px;
+	height:auto;
+	padding:10px;
+	border:none;
+}
+.bg ul li .info{
+	width:280px;
+	height:auto;
+	border-radius:8px;
+	box-shadow:0 0 11px #666666;
+	background:#ffffff;
+}
+.bg ul li .info .pic{
+	width:260px;
+	height:auto;
+	margin:0 auto;
+	padding-top:10px;
+}
+.bg ul li .info .pic img{
+	width:260px;
+	border-radius:3px;
+	cursor:pointer;
+}
+.bg ul li .info .desc{
+	width:260px;
+	height:40px;
+	margin:0 auto;
+	line-height:40px;
+	text-align:right;
+	color:#666666;
+	font-size:18px;
+	font-weight:bold;
+	overflow:hidden;
+}
+</style>
+<script src="/opus/J_04/js/jquery-1.7.2.js"></script>
+<script>
+$(function(){
+	//测试数据
+	var temp = [{'src':'1.jpg','title':'怎么解冻啊。'},{
+				 'src':'2.jpg','title':'你是怎么跑上面去了。'},{
+				 'src':'3.jpg','title':'困...'},{
+				 'src':'4.jpg','title':'进击的汪星人。'},{
+				 'src':'5.jpg','title':'急眼的家雀。'},{
+				 'src':'6.jpg','title':'让我静一会儿。'},{
+				 'src':'7.jpg','title':'我是一只小小鸟。'},{
+				 'src':'8.jpg','title':'嘘，我想做一只好汪星人。'},{
+				 'src':'9.jpg','title':'山寨版狮子王。'},{
+				 'src':'10.jpg','title':'我胖我骄傲。'}];	
+	my_pbl(temp.sort(function(){
+			return Math.random()-0.5;	
+	}));
+	function my_pbl(data){
+		var aUl = $('.bg ul');
+		for(var i = 0; i < data.length; i++){
+			var oImg = new Image();
+			oImg.src = '/opus/J_04/img/' + data[i].src;
+			oImg.title = data[i].title;
+			oImg.onload = function (){
+				var oLi = $('<li></li>').html('<div class="info"><div class="pic"><img src="' + this.src + '" /></div><div class="desc"><a href="#">' + this.title + '</a></div></div>');
+				//原始宽高
+				oLi.get(0).children[0].height = 280 * this.height / this.width;
+				//判断哪一个最短
+				var arr = [];
+				for(var j = 0; j < aUl.length; j++){
+					arr[j] = aUl[j];
+				}
+				arr.sort(function (ul1, ul2){
+					return ul1.offsetHeight - ul2.offsetHeight;
+				});
+				//插入
+				oLi.appendTo(arr[0]);
+				
+			};
+		}		
+	}
+	//设置滚动加载
+	window.onscroll = window.onresize = function(){
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		if(document.documentElement.scrollHeight - document.documentElement.clientHeight == scrollTop){
+			my_pbl(temp.sort(function(){
+				return Math.random()-0.5;	
+			}));
+		}
+	};
+	//
+	$('img').live({mouseenter : function(){
+			$(this).stop().animate({opacity : 0.6});//鼠标移入事件
+		},mouseleave : function(){
+			$(this).stop().animate({opacity : 1});//鼠标移出事件
+	}});
+		
+});
+</script>
+</head>
+
+<body>
+<div class="title">
+	无限瀑布流 利用jquery完成
+</div>
+<div class="bg">
+	<ul></ul>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</div>
+</body>
+</html>

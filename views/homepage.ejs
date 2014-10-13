@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IT酷鱼网 | Yves个人作品网 -- 20140501版</title>
+<link href="/css/common.css" rel="stylesheet" type="text/css" />
+<script src="/js/MyQuery.js" ></script>
+<script src="/js/MyCommon.js" ></script>
+<script>
+$(function(){
+	var iMenuNum = 0;
+	toMenu(iMenuNum);//封装后的公共菜单事件
+	
+	//----------分页样式
+	$('#page div').hover(function(){
+		$(this).animate({opacity : 0});
+	},function(){
+		$(this).animate({opacity : 100});
+	});
+	$('#page div').click(function(){
+		window.location.href = '/works';
+	});
+	$('#page2 div').hover(function(){
+		$(this).animate({opacity : 0});
+	},function(){
+		$(this).animate({opacity : 100});
+	});
+	$('#page2 div').click(function(){
+		window.location.href = '/profile';
+	});
+	//----------实例样式
+	$('.case li').hover(function(){
+		$(this).find('.case_w').animate({bottom : 30});
+		$(this).find('.fire').animate({opacity : 50});
+		$(this).find('.x').animate({opacity : 100});
+		$(this).find('.y').animate({right : 80 , opacity : 100});
+	},function(){
+		$(this).find('div').animate({bottom : 14});
+		$(this).find('.fire').animate({opacity : 0});
+		$(this).find('.x').animate({opacity : 0});
+		$(this).find('.y').animate({right : 50 , opacity : 0});
+	});
+	//视差滚动 + 无缝滚动
+	moveSliderBg($('.pxs_bg1'),12);
+	moveSliderBg($('.pxs_bg2'),6);
+	moveSliderBg($('.pxs_bg3'),3);
+	function moveSliderBg(obj,n){
+		var oldW = parseInt(obj.css('width'));
+		obj.css({width : oldW * 3 + 'px'});
+		setInterval(function(){
+			if(parseInt(obj.css('left')) <= (-oldW + oldW/n)){
+				obj.css({left : '0px'});
+			}
+			obj.animate({left : parseInt(obj.css('left')) - oldW/n});//
+		},4000);
+	}
+	moveBg([$('.pxs_bg1'),$('.pxs_bg2'),$('.pxs_bg3')]);
+	function moveBg(arr){
+		var l = 0;
+		var t = 0;
+		var dx = $('.pxs_bg').get(0).offsetWidth / 2;
+		var dy = (100 + $('.pxs_bg').get(0).offsetHeight) / 2;
+		var n = 0;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			l = oEvent.clientX;
+			t = oEvent.clientY;
+			for(var i = 0; i < arr.length; i++){
+				if(t > dy){
+					n = n + 0.08;
+				}else{
+					n = n - 0.08;
+				}
+				(n > 20) && (n = 20);
+				(n < -20) && (n = -20);
+				arr[i].css({top : n + 'px'});
+			}
+		};
+	}
+	moveSlider($('.index_xxk_slider'),5);
+	function moveSlider(obj,n){
+		var oldW = parseInt(obj.css('width')) / 2;
+		obj.get(0).innerHTML += obj.get(0).innerHTML;
+
+		setInterval(function(){
+			if(parseInt(obj.css('left')) <= -oldW){
+				obj.css({left : '0px'});
+			}
+			obj.animate({left : parseInt(obj.css('left')) - oldW / n});
+		},4000);
+	}
+	//分块运动
+	(function(){
+		var oBox = $('.index_my').get(0);
+		//自定义行列个数
+		var R = 5;
+		var C = 3;
+		var arrSpan=[];
+		//循环添加span元素作为图片
+		for(var r = 0; r < R; r++){//循环每一行
+			arrSpan[r]=[];
+			for(var c = 0; c < C; c++){//循环每一列
+				//创建span元素
+				var oSpan = document.createElement('span');
+				//动态的根据RC定义span的宽高
+				oSpan.style.width = oBox.offsetWidth / C + 'px';
+				oSpan.style.height = oBox.offsetHeight / R + 'px';
+				//插入span元素到div中
+				oBox.appendChild(oSpan);
+				//对span增加定位
+				oSpan.style.position = 'absolute';
+				//插入后才能获取该span的宽高对span的左右边距
+				oSpan.style.left = oSpan.offsetWidth * c + 'px';
+				oSpan.style.top = oSpan.offsetHeight * r + 'px';
+				//对span的图片背景进行定位
+				oSpan.style.background = 'url(/img/my_1.jpg) no-repeat ' + -oSpan.offsetWidth * c + 'px ' + -oSpan.offsetHeight * r + 'px';
+				arrSpan[r][c] = oSpan;
+			}	
+		}
+		//获取span元素
+		var aSpan = oBox.children;
+		//定义img的个数
+		var iImg = 5;
+		//记录编号
+		var iNow = 0;
+		var timer = null;
+		//定时器控制图片的循环
+		setInterval(function(){
+			iNow++;
+			for(var r = 0; r < R; r++){
+				for(var c = 0; c < C; c++){
+					(function(r,c){
+						setTimeout(function(){
+							arrSpan[r][c].style.backgroundImage = 'url(/img/my_' + (iNow + 1) % iImg + '.jpg)';
+							arrSpan[r][c].style.opacity = 0;		
+							$(arrSpan[r][c]).animate({opacity : 100});				
+						},Math.random() * 700);	
+					})(r, c);
+				}
+			}
+		},4000);
+	})(); 
+	//图片式选项卡
+	(function(){
+		$('.index_skills_box div').each(function(index, element) {
+			if(index != 5){
+				var _this = $(this);
+				var _width = parseInt(_this.css('width'));
+				var _height = parseInt(_this.css('height'));
+				var _top = parseInt(_this.css('top'));
+				var _left = parseInt(_this.css('left'));
+				$(this).hover(function(){
+					_this.animate({
+						//width :  _width + 8,
+						//height : _height + 8,
+						//top : _top - 4,
+						//left : _left - 4,
+						opacity : 100
+					});	
+					$('.index_skills_doc ul li').css({display:'none'});
+					$('.index_skills_doc ul li').eq(index).css({display:'block'});
+				},function(){
+					_this.animate({
+						//width :  _width ,
+						//height : _height ,
+						//top : _top ,
+						//left : _left
+						opacity : 60
+					});	
+				}); 
+			}
+        	
+        });
+	})();
+});
+
+</script>
+</head>
+
+<body>
+<div class="body">
+	<div class="top">
+		<div class="logo">
+        	<div class="sc">
+            	<div class="item">
+    				<div>
+                    	<a href="###">
+                    		<div class="item_content" title="联系电话">
+                        		18210088607
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+                            	<img alt="" src="/img/top_4.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_4.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+    	                	<div class="item_content" title="我的QQ">
+        		                QQ:461836324
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_3.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_3.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                <div class="item">
+    				<div>
+	                    <a href="###">
+                    		<div class="item_content" title="我的姓名">
+                        		于春宇
+        					</div>
+                        </a>
+        				<a class="link">
+            				<span>
+	                            <img alt="" src="/img/top_2.png" style="margin-top:-28px;"></img>
+                				<img alt="" src="/img/top_2.png"></img>
+            				</span>
+       					</a>
+    				</div>
+				</div>
+                
+            </div>
+        </div>
+		<div class="menu" id="menu">
+			<ul>
+				<li><a href="/homepage" style="background-image:url(/img/menu_homepage.png);"></a></li>
+				<li><a href="/profile" style="background-image:url(/img/menu_personage.png);"></a></li>
+				<li><a href="/blog" style="background-image:url(/img/menu_article.png);"></a></li>
+				<li><a href="/works" style="background-image:url(/img/menu_cases.png);"></a></li>
+				<li><a href="/message" style="background-image:url(/img/menu_communication.png);"></a></li>
+			</ul> 
+			<div class="menu_slider">
+				<div class="menu_slider_bar" id="menuSliderBar"></div>
+				<div class="menu_slider_pointer" id="menuSliderPointer"></div>
+			</div>
+		</div>
+    </div>
+    <div class="center">
+    	<div class="index_xxk">
+        	<div class="pxs_bg">
+    			<div class="pxs_bg1"></div>
+    			<div class="pxs_bg2"></div>
+    			<div class="pxs_bg3"></div>
+			</div>
+        	<div class="index_xxk_wrapper" style="display: block;">
+            	<ul class="index_xxk_slider">
+                    <li>
+                        <img src="/img/slider_1.png"></img>
+                    </li>
+                    <li>
+                        <img src="/img/slider_2.png"></img>
+                    </li>
+                    <li>
+                        <img src="/img/slider_3.png"></img>
+                    </li>
+                    <li>
+                        <img src="/img/slider_4.png"></img>
+                    </li>
+                    <li>
+                        <img src="/img/slider_5.png"></img>
+                    </li>    
+                </ul>
+        	</div>
+        </div>
+        <div class="center_box">
+           	<div class="box_t"></div>
+            <div class="box_m">
+            	<div class="box_area">
+                	<img class="fl inline" src="/img/text_myworks.png" />
+                    <div id="page" class="page fr inline page_bg2">
+                    	<div class="fl inline page_m"/></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box_b"></div>
+            <ul class="case">
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                       	<img src="/opus/img/Y_01.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/Y_01/index" target="_blank" title="小球称重"></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                        <div class="case_title case_t3 case_title_t"></div>
+                       	<img src="/opus/img/Y_04.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/Y_04/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t1"></div>
+                        <div class="case_title case_t3 case_title_t"></div>
+                       	<img src="/opus/img/Y_05.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/Y_05/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="/opus/img/J_02.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/J_02/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                        <div class="case_title case_t6 case_title_t"></div>
+                       	<img src="/opus/img/J_05.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/J_05/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+                <li>
+                   	<div class="case_w">
+                    	<div class="case_title case_t5"></div>
+                       	<img src="/opus/img/J_04.jpg"></img>
+                        <div class="fire"></div>
+						<a class="y" href="/opus/J_04/index" target="_blank" title=""></a>
+                    </div>
+                </li>
+            </ul>
+            <div class="box_t"></div>
+            <div class="box_m">
+            	<div class="box_area">
+                	<img class="fl inline" src="/img/text_profile.png" />
+                    <div id="page2" class="page fr inline page_bg2">
+                    	<div class="fl inline page_m"/></div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="box_b"></div>
+            
+            <div class="box2_t"></div>
+            <div class="box2_m">
+            	<div class="box_area">
+                	<div class="index_my">
+                    	
+                    </div>
+                    <div class="index_profile">
+                    	<div class="index_skills">
+                        	<div class="index_skills_box">
+                            	<div class="skills5"></div>
+                            	<div class="skills4"></div>
+                                <div class="skills3"></div>
+                                <div class="skills2"></div>
+                                <div class="skills1"></div>
+                        		<div class="index_skills_title">
+                            		技能
+                                </div>
+                            </div>
+                        </div>
+                        <div class="index_skills_doc">
+                        	<ul>
+                            	<li>
+                                	<h2>数据库及其他</h2>
+                                    (1)熟悉使用MySql、Oracle数据库的操作。<br>
+									(2)常用的sql语句编写。<br>
+                                    (3)熟悉Tomcat、AppServ服务器。<br>
+									(4)熟练使用MyEclipse、Dreamweaver等开发工具。<br>
+                                    (5)熟练使用Photoshop软件。<br>
+                                </li>
+                                <li>
+                                	<h2>后台语言</h2>
+                                    (1)熟悉java语言、了解php开发。<br>
+									(2)熟悉使用JSP、Servlet、JavaBean、JDBC、XML等J2EE技术进行平台开发。<br>
+									(3)熟悉使用Struts2、Hibernate、Spring等开源框架。<br>
+                                </li>
+                                <li>
+                                	<h2>Node.js及HTML5实例</h2>
+                                    (1)时钟(HTML5)<br>
+									(2)其他<br>
+                                </li>
+                                <li>
+                                	<h2>常见JS库及面向对象实例</h2>
+                                    (1)瀑布流(Jquery)<br>
+									(2)照片墙<br>
+                                    (3)其他<br>
+                                </li>
+                                <li style="display:block">
+                                	<h2>前端技术</h2>
+                                    (1)熟练使用原生javascript开发，具有良好的编程习惯，可独立开发网上常见特效及组件，例如运动等。<br>
+									(2)熟练使用Ajax、jsonp技术与后台进行交互。<br>
+									(3)熟练使用常见JS库：JQuery、Extjs。<br>
+									(4)熟练使用命名空间、面向对象等技术。<br>
+                                    (5)了解sea.js模块化开发。<br>
+                                    (6)熟悉使用Regex表达式。<br>
+                                    (7)了解node.js的开发。<br>
+                                    (8)熟练使用HTML、CSS等布局。<br>
+                                    (9)了解HTML5语言、css3语言。<br>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box2_b"></div>
+          
+        </div>
+    </div>
+    <div class="foot">Yves个人网站&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/">京ICP备14019006号</a>&nbsp;&nbsp;|&nbsp;&nbsp;联系方式：18210088607&nbsp;&nbsp;|&nbsp;&nbsp;QQ:461836324&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+</div>
+</body>
+</html>

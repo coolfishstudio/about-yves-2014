@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>手风琴版选项卡</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+#box{
+	width: 660px; 
+	height: 254px; 
+	border: 1px solid #ccc; 
+	margin: 100px auto 0; 
+	overflow:hidden;
+	border:2px solid #e1e1e1;
+	box-shadow:5px 5px 10px #333333;
+}
+#box ul{
+	width: 3300px; 
+	height: 254px;
+}
+#box ul li{ 
+	width: 22px; 
+	height: 254px; 
+	float: left; 
+	position: relative; 
+	overflow:hidden; 
+}
+#box ul li .active{ 
+	width:550px; 
+}
+#box ul span { 
+	width: 21px; 
+	height: 244px; 
+	padding-top: 10px; 
+	border-right: 1px solid #ffffff; 
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	color: #ffffff;
+	font-family:'微软雅黑'; 
+	font-size: 12px; 
+	text-align: center; 
+	cursor: pointer; 
+}
+#box ul img { 
+	width: 550px; 
+	height: 254px; 
+}
+.bg{
+	background:#ffffff url(/opus/Y_06/img/bg.jpg) no-repeat;
+}
+</style>
+<script>
+window.onload = function(){
+	createAccordion('box');
+};
+
+function createAccordion(id){
+	var oDiv = document.getElementById(id);
+	var iMinWidth = 9999999;
+	var aLi = oDiv.getElementsByTagName('li');
+	var aSpan = oDiv.getElementsByTagName('span');
+	var i = 0;
+	oDiv.timer = null;
+	for(i = 0; i < aSpan.length; i++){
+		aSpan[i].index = i;
+		aSpan[i].onmouseover = function(){
+			gotoImg(oDiv,this.index,iMinWidth);
+		};
+		iMinWidth = Math.min(iMinWidth,aLi[i].offsetWidth);
+	}
+}
+
+function gotoImg(oDiv,iIndex,iMinWidth){
+	if(oDiv.timer){
+		clearInterval(oDiv.timer);
+	}
+	oDiv.timer = setInterval(function(){
+			changeWidthInner(oDiv,iIndex,iMinWidth);
+		}, 30);
+}
+
+function changeWidthInner(oDiv,iIndex,iMinWidth){
+	var aLi = oDiv.getElementsByTagName('li');
+	var aSpan = oDiv.getElementsByTagName('span');
+	var iWidth = oDiv.offsetWidth;
+	var w = 0;
+	var bEnd = true;
+	var i = 0;
+	for(i = 0; i < aLi.length; i++){
+		if(i == iIndex){
+			continue;
+		}
+		if(iMinWidth == aLi[i].offsetWidth){
+			iWidth -= iMinWidth;
+			continue;
+		}
+		bEnd = false;
+		speed = Math.ceil((aLi[i].offsetWidth - iMinWidth) / 10);
+		w = aLi[i].offsetWidth - speed;
+		if(w <= iMinWidth){
+			w = iMinWidth;
+		}
+		aLi[i].style.width = w + 'px';
+		iWidth -= w;
+	}
+	aLi[iIndex].style.width = iWidth + 'px';
+	if(bEnd){
+		clearInterval(oDiv.timer);
+		oDiv.timer=null;
+	}
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	手风琴版选项卡
+</div>
+<div id="box">
+    <ul>
+        <li class="active" style="width: 550px;">
+            <span class="bg">第一页</span>
+            <img src="/opus/Y_06/img/1.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第二页</span>
+            <img src="/opus/Y_06/img/2.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第三页</span>
+            <img src="/opus/Y_06/img/3.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第四页</span>
+            <img src="/opus/Y_06/img/4.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第五页</span>
+            <img src="/opus/Y_06/img/5.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第六页</span>
+            <img src="/opus/Y_06/img/6.jpg" />
+        </li>
+        <li class="active">
+            <span class="bg">第七页</span>
+            <img src="/opus/Y_06/img/7.jpg" />
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

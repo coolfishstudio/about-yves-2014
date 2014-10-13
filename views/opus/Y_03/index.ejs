@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>mac经典工具栏</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+.bg{
+	width:1024px;
+	height:600px;
+	background:url(/opus/Y_03/img/bg.jpg) no-repeat;
+	margin:50px auto;
+	position:relative;
+	box-shadow:5px 5px 10px #333333;
+	text-align:center;
+}
+#mac_util{
+	position:absolute;
+	width:100%; 
+	left:0; 
+	bottom:0;
+}
+#mac_util img{
+	cursor:pointer;
+}
+</style>
+<script>
+window.onload = function(){
+	(function(){
+		var oBox = document.getElementById('box');
+		var oUtil = document.getElementById('mac_util');
+		var aImg = oUtil.getElementsByTagName('img');
+		var iLeft = (document.documentElement.clientWidth - oBox.offsetWidth)/2;
+		var iTop = oBox.offsetTop;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			for(var i = 0; i < aImg.length; i++){
+				var a = aImg[i].offsetLeft + aImg[i].offsetWidth / 2 + iLeft - oEvent.clientX;	
+				var b = oUtil.offsetTop + aImg[i].offsetHeight / 2 + iTop - oEvent.clientY;
+				var dis = Math.sqrt(a * a + b * b);
+				var scale = 1 - dis / 300;
+				scale < 0.5 && (scale = 0.5);
+				aImg[i].width = 128 * scale;
+			}
+		};
+	})();
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	经典mac工具栏
+</div>
+<div class="bg" id="box">
+	<div id="mac_util">
+        <img src="/opus/Y_03/img/1.png" width="64">
+        <img src="/opus/Y_03/img/2.png" width="64">
+        <img src="/opus/Y_03/img/3.png" width="64">
+        <img src="/opus/Y_03/img/4.png" width="64">
+        <img src="/opus/Y_03/img/5.png" width="64">
+        <img src="/opus/Y_03/img/6.png" width="64">
+        <img src="/opus/Y_03/img/7.png" width="64">
+        <img src="/opus/Y_03/img/8.png" width="64">
+        <img src="/opus/Y_03/img/9.png" width="64">
+        <img src="/opus/Y_03/img/10.png" width="64">
+        <img src="/opus/Y_03/img/11.png" width="64">
+    </div>
+</div>
+</body>
+</html>
